@@ -1,2 +1,2 @@
 # iotdb-redis
-pipe-oriented programming Redis interface
+IOTDB Redis "pipe-oriented programming" functions

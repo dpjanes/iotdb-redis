@@ -1,0 +1,34 @@
+{
+    "author": "David Janes <davidjanes@davidjanes.com>", 
+    "bugs": {
+        "url": "https://github.com/dpjanes/iotdb-redis/issues"
+    }, 
+    "dependencies": {
+        "iotdb-errors": "~3.0.4", 
+        "iotdb-helpers": "~3.0.30", 
+        "redis": "~2.7.1"
+    }, 
+    "description": "IOTDB AWS Promise Functions", 
+    "devDependencies": {
+        "grunt": "~1.0.1", 
+        "grunt-contrib-jshint": "~1.1.0", 
+        "grunt-contrib-nodeunit": "~1.0.0", 
+        "grunt-contrib-uglify": "~2.3.0", 
+        "grunt-contrib-watch": "~1.0.0", 
+        "grunt-jsbeautifier": "~0.2.13", 
+        "jshint-stylish": "~2.2.1", 
+        "load-grunt-tasks": "~3.5.2", 
+        "request": "~2.81.0"
+    }, 
+    "license": "Apache-2.0", 
+    "main": "index.js", 
+    "name": "iotdb-redis", 
+    "repository": {
+        "type": "git", 
+        "url": "https://github.com/dpjanes/iotdb-redis"
+    }, 
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    }, 
+    "version": "1.0.0"
+}
