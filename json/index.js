@@ -1,5 +1,5 @@
 /*
- *  index.js
+ *  json/index.js
  *
  *  David Janes
  *  IOTDB
@@ -11,11 +11,7 @@
 "use strict";
 
 module.exports = Object.assign({},
-    require("./expire"),
     require("./get"),
-    require("./initialize"),
     require("./set"),
     {}
 );
-
-module.exports.json = require("./json");
