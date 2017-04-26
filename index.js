@@ -10,4 +10,10 @@
 
 "use strict";
 
-exports.initialize = require("./initialize").initialize;
+module.exports = Object.assign({},
+    require("./expire"),
+    require("./get"),
+    require("./initialize"),
+    require("./set"),
+    {}
+);
