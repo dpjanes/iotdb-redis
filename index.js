@@ -11,10 +11,12 @@
 "use strict";
 
 module.exports = Object.assign({},
+    require("./del"),
     require("./expire"),
     require("./get"),
     require("./initialize"),
     require("./set"),
+    require("./setnx"),
     {}
 );
 

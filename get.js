@@ -20,8 +20,6 @@ const redis = require("redis");
 /**
  *  Accepts: self.redis, self.key
  *  Produces: self.value, self.exists
- *
- *  This will not finish until success or failure
  */
 const get = (_self, done) => {
     const self = _.d.clone.shallow(_self);

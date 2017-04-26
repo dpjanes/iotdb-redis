@@ -1,5 +1,5 @@
 /**
- *  expire.js
+ *  del.js
  *
  *  David Janes
  *  IOTDB
@@ -18,18 +18,17 @@ const Q = require("q");
 const redis = require("redis");
 
 /**
- *  Accepts: self.redis, self.key, self.expires (seconds)
+ *  Accepts: self.redis, self.key
  *  Produces: N/A
  */
-const expire = (_self, done) => {
+const del = (_self, done) => {
     const self = _.d.clone.shallow(_self);
-    const method = "expire";
+    const method = "del";
 
     assert.ok(self.redis, `${method}: expected self.redis`)
     assert.ok(_.is.String(self.key), `${method}: expected self.key to be a String`)
-    assert.ok(_.is.Number(self.expires), `${method}: expected self.expires to be a Number`)
 
-    self.redis.expire(self.key, self.expires, (error, value) => {
+    self.redis.del(self.key, (error) => {
         if (error) {
             return done(error);
         }
@@ -41,4 +40,4 @@ const expire = (_self, done) => {
 /**
  *  API
  */
-exports.expire = Q.denodeify(expire);
+exports.del = Q.denodeify(del);
