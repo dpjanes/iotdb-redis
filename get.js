@@ -44,3 +44,4 @@ const get = (_self, done) => {
  *  API
  */
 exports.get = Q.denodeify(get);
+exports.get.json = require("./json/get").get;

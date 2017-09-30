@@ -27,8 +27,9 @@ const setnx = (_self, done) => {
 
     assert.ok(self.redis, `${method}: expected self.redis`)
     assert.ok(_.is.String(self.key), `${method}: expected self.key to be a String`)
+    assert.ok(_.is.String(self.value), `${method}: expected self.value to be a String`)
 
-    self.redis.setnx(self.key, (error, locked) => {
+    self.redis.setnx(self.key, self.value, (error, locked) => {
         if (error) {
             return done(error);
         }

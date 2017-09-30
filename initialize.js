@@ -17,6 +17,8 @@ const assert = require("assert");
 const Q = require("q");
 const redis = require("redis");
 
+const logger = require("./logger")(__filename)
+
 /**
  *  Accepts: self.redisd (or null)
  *  Produces: self.redis
@@ -29,22 +31,37 @@ const initialize = (_self, done) => {
 
     const redisd = _.d.compose.shallow(self.redisd, {
         host: "0.0.0.0",
-        password: null,
         database: 0
     })
     if (!redisd) {
         done(null, self);
     }
 
+    _.mapObject(redisd, (value, key) => {
+        if (_.is.Nullish(value)) {
+            delete redisd[key];
+        }
+    })
+
+    logger.info({
+        method: method,
+        host: redis.host,
+    }, "connecting")
+
     self.redis = redis.createClient(redisd)
     self.redis.on("error", error => {
-        if (self.verbose) console.log("#", "REDIS ERROR", _.error.message(error));
+        logger.error({
+            method: method,
+            error: _.error.message(error),
+        }, "Redis error - cannot connect")
 
         done(error)
         done = _.noop;
     })
     self.redis.on("connect", () => {
-        if (self.verbose) console.log("-", "REDIS CONNECTED");
+        logger.info({
+            method: method,
+        }, "connected")
 
         done(null, self)
         done = _.noop;

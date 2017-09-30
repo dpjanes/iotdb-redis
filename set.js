@@ -42,3 +42,4 @@ const set = (_self, done) => {
  *  API
  */
 exports.set = Q.denodeify(set);
+exports.set.json = require("./json/set").set;
