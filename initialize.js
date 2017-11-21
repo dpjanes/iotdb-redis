@@ -14,7 +14,6 @@ const _ = require("iotdb-helpers");
 
 const assert = require("assert");
 
-const Q = require("q");
 const redis = require("redis");
 
 const logger = require("./logger")(__filename)
@@ -71,4 +70,4 @@ const initialize = (_self, done) => {
 /**
  *  API
  */
-exports.initialize = Q.denodeify(initialize);
+exports.initialize = _.promise.denodeify(initialize);

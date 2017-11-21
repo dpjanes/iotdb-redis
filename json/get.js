@@ -14,7 +14,6 @@ const _ = require("iotdb-helpers");
 
 const assert = require("assert");
 
-const Q = require("q");
 const redis = require("redis");
 
 /**
@@ -46,4 +45,4 @@ const get = (_self, done) => {
 /**
  *  API
  */
-exports.get = Q.denodeify(get);
+exports.get = _.promise.denodeify(get);
