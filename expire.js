@@ -53,4 +53,4 @@ const expire_p = expires => _.promise.make((self, done) => {
  *  API
  */
 exports.expire = expire;
-exports.expire.p = expire.p;
+exports.expire.p = expire_p;
