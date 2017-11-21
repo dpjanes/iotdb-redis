@@ -57,7 +57,38 @@ const set_json = _.promise.make((self, done) => {
 })
 
 /**
+ *  Paramaterized
+ */
+const set_p = (key, value) => _.promise.make((self, done) => {
+    const method = "set.p";
+
+    _.promise.make(self)
+        .then(_.promise.add({
+            key: key || self.key,
+            value: value || self.value,
+        }))
+        .then(set)
+        .then(_.promise.done(done, self))
+        .catch(done)
+})
+
+const set_json_p = (key, json) => _.promise.make((self, done) => {
+    const method = "set.json.p";
+
+    _.promise.make(self)
+        .then(_.promise.add({
+            key: key || self.key,
+            json: json || self.json,
+        }))
+        .then(set_json)
+        .then(_.promise.done(done, self))
+        .catch(done)
+})
+
+/**
  *  API
  */
 exports.set = set;
+exports.set.p = set_p;
 exports.set.json = set_json;
+exports.set.json.p = set_json_p;

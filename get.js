@@ -64,7 +64,32 @@ const get_json = _.promise.make((self, done) => {
 })
 
 /**
+ *  Paramaterized
+ */
+const get_p = key => _.promise.make((self, done) => {
+    const method = "get.p";
+
+    _.promise.make(self)
+        .then(_.promise.add("key", key || self.key))
+        .then(get)
+        .then(_.promise.done(done, self, "value,exists"))
+        .catch(done)
+})
+
+const get_json_p = key => _.promise.make((self, done) => {
+    const method = "get.json.p";
+
+    _.promise.make(self)
+        .then(_.promise.add("key", key || self.key))
+        .then(get_json)
+        .then(_.promise.done(done, self, "value,exists,json"))
+        .catch(done)
+})
+
+/**
  *  API
  */
 exports.get = get;
+exports.get.p = get_p;
 exports.get.json = get_json;
+exports.get.json.p = get_json_p;
