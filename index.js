@@ -19,5 +19,3 @@ module.exports = Object.assign({},
     require("./setnx"),
     {}
 );
-
-module.exports.json = require("./json");
