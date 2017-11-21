@@ -20,8 +20,7 @@ const redis = require("redis");
  *  Accepts: self.redis, self.key, self.expires (seconds)
  *  Produces: N/A
  */
-const expire = (_self, done) => {
-    const self = _.d.clone.shallow(_self);
+const expire = _.promise.make((self, done) => {
     const method = "expire";
 
     assert.ok(self.redis, `${method}: expected self.redis`)
@@ -35,9 +34,9 @@ const expire = (_self, done) => {
 
         done(null, self);
     })
-}
+})
 
 /**
  *  API
  */
-exports.expire = _.promise.denodeify(expire);
+exports.expire = expire;

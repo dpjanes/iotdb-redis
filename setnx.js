@@ -20,8 +20,7 @@ const redis = require("redis");
  *  Accepts: self.redis, self.key
  *  Produces: N/A
  */
-const setnx = (_self, done) => {
-    const self = _.d.clone.shallow(_self);
+const setnx = _.promise.make((self, done) => {
     const method = "setnx";
 
     assert.ok(self.redis, `${method}: expected self.redis`)
@@ -37,9 +36,9 @@ const setnx = (_self, done) => {
 
         done(null, self);
     })
-}
+})
 
 /**
  *  API
  */
-exports.setnx = _.promise.denodeify(setnx);
+exports.setnx = setnx;

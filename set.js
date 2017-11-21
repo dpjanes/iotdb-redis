@@ -20,8 +20,7 @@ const redis = require("redis");
  *  Accepts: self.redis, self.key, self.value
  *  Produces: N/A
  */
-const set = (_self, done) => {
-    const self = _.d.clone.shallow(_self);
+const set = _.promise.make((self, done) => {
     const method = "set";
 
     assert.ok(self.redis, `${method}: expected self.redis`)
@@ -35,10 +34,30 @@ const set = (_self, done) => {
 
         done(null, self);
     })
-}
+})
+
+/**
+ *  Accepts: self.redis, self.key, self.json
+ *  Produces: N/A
+ */
+const set_json = _.promise.make((self, done) => {
+    const method = "json.set";
+
+    assert.ok(self.redis, `${method}: expected self.redis`)
+    assert.ok(_.is.String(self.key), `${method}: expected self.key to be a String`)
+    assert.ok(_.is.JSON(self.json), `${method}: expected self.json to be a JSONable Object`)
+
+    self.redis.set(self.key, JSON.stringify(self.json), error => {
+        if (error) {
+            return done(error);
+        }
+
+        done(null, self);
+    })
+})
 
 /**
  *  API
  */
-exports.set = _.promise.denodeify(set);
-exports.set.json = require("./json/set").set;
+exports.set = set;
+exports.set.json = set_json;

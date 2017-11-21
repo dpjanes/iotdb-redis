@@ -20,8 +20,7 @@ const redis = require("redis");
  *  Accepts: self.redis, self.key
  *  Produces: N/A
  */
-const del = (_self, done) => {
-    const self = _.d.clone.shallow(_self);
+const del = _.promise.make((self, done) => {
     const method = "del";
 
     assert.ok(self.redis, `${method}: expected self.redis`)
@@ -34,9 +33,9 @@ const del = (_self, done) => {
 
         done(null, self);
     })
-}
+})
 
 /**
  *  API
  */
-exports.del = _.promise.denodeify(del);
+exports.del = del;

@@ -24,8 +24,7 @@ const logger = require("./logger")(__filename)
  *
  *  This will not finish until success or failure
  */
-const initialize = (_self, done) => {
-    const self = _.d.clone.shallow(_self);
+const initialize = _.promise.make((self, done) => {
     const method = "initialize";
 
     const redisd = _.d.compose.shallow(self.redisd, {
@@ -65,9 +64,9 @@ const initialize = (_self, done) => {
         done(null, self)
         done = _.noop;
     })
-}
+})
 
 /**
  *  API
  */
-exports.initialize = _.promise.denodeify(initialize);
+exports.initialize = initialize;
