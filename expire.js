@@ -39,10 +39,11 @@ const expire = _.promise.make((self, done) => {
 /**
  *  Paramaterized
  */
-const expire_p = expires => _.promise.make((self, done) => {
+const expire_p = (key, expires) => _.promise.make((self, done) => {
     const method = "expire.p";
 
     _.promise.make(self)
+        .then(_.promise.add("key", key || self.key))
         .then(_.promise.add("expires", _.is.Number(expires) ? expires : self.expires))
         .then(expire)
         .then(_.promise.done(done, self))
