@@ -5,7 +5,7 @@
     }, 
     "dependencies": {
         "iotdb-errors": "~3.0.6", 
-        "iotdb-helpers": "~3.1.5", 
+        "iotdb-helpers": "~3.1.16", 
         "redis": "~2.8.0"
     }, 
     "description": "IOTDB AWS Promise Functions", 
@@ -30,5 +30,5 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     }, 
-    "version": "1.0.5"
+    "version": "1.0.6"
 }
