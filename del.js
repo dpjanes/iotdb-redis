@@ -14,8 +14,6 @@ const _ = require("iotdb-helpers");
 
 const assert = require("assert");
 
-const redis = require("redis");
-
 /**
  *  Accepts: self.redis, self.key
  *  Produces: N/A
