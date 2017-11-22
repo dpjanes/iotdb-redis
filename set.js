@@ -18,14 +18,12 @@ const assert = require("assert");
  *  Accepts: self.redis, self.key, self.value
  *  Produces: N/A
  */
-const set = _.promise.make((self, done) => {
-    const method = "set";
-
+const key_value = (method, redis_method) => _.promise.make((self, done) => {
     assert.ok(self.redis, `${method}: expected self.redis`)
     assert.ok(_.is.String(self.key), `${method}: expected self.key to be a String`)
     assert.ok(_.is.String(self.value), `${method}: expected self.value to be a String`)
 
-    self.redis.set(self.key, self.value, error => {
+    self.redis[redis_method](self.key, self.value, error => {
         if (error) {
             return done(error);
         }
@@ -38,14 +36,12 @@ const set = _.promise.make((self, done) => {
  *  Accepts: self.redis, self.key, self.json
  *  Produces: N/A
  */
-const set_json = _.promise.make((self, done) => {
-    const method = "json.set";
-
+const key_json = (method, redis_method) => _.promise.make((self, done) => {
     assert.ok(self.redis, `${method}: expected self.redis`)
     assert.ok(_.is.String(self.key), `${method}: expected self.key to be a String`)
     assert.ok(_.is.JSON(self.json), `${method}: expected self.json to be a JSONable Object`)
 
-    self.redis.set(self.key, JSON.stringify(self.json), error => {
+    self.redis[redis_method](self.key, JSON.stringify(self.json), error => {
         if (error) {
             return done(error);
         }
@@ -57,36 +53,44 @@ const set_json = _.promise.make((self, done) => {
 /**
  *  Paramaterized
  */
-const set_p = (key, value) => _.promise.make((self, done) => {
-    const method = "set.p";
-
+const key_value_p = (method, underlying) => (key, value) => _.promise.make((self, done) => {
     _.promise.make(self)
         .then(_.promise.add({
             key: key || self.key,
             value: value || self.value,
         }))
-        .then(set)
+        .then(underlying)
         .then(_.promise.done(done, self))
         .catch(done)
 })
 
-const set_json_p = (key, json) => _.promise.make((self, done) => {
-    const method = "set.json.p";
-
+const key_json_p = (method, underlying) => (key, json) => _.promise.make((self, done) => {
     _.promise.make(self)
         .then(_.promise.add({
             key: key || self.key,
             json: json || self.json,
         }))
-        .then(set_json)
+        .then(underlying)
         .then(_.promise.done(done, self))
         .catch(done)
 })
 
 /**
  *  API
+ *
+ *  Note the highly curried generalized functions
  */
-exports.set = set;
-exports.set.p = set_p;
-exports.set.json = set_json;
-exports.set.json.p = set_json_p;
+exports.set = key_value("set", "set");
+exports.set.p = key_value_p("set.p", exports.set);
+exports.set.json = key_json("set.json", "set");
+exports.set.json.p = key_json_p("set.json.p", exports.set.json)
+
+exports.rpush = key_value("rpush", "rpush");
+exports.rpush.p = key_value_p("rpush.p", exports.rpush);
+exports.rpush.json = key_json("rpush.json", "rpush");
+exports.rpush.json.p = key_json_p("rpush.json.p", exports.rpush.json)
+
+exports.lpush = key_value("lpush", "lpush");
+exports.lpush.p = key_value_p("lpush.p", exports.lpush);
+exports.lpush.json = key_json("lpush.json", "lpush");
+exports.lpush.json.p = key_json_p("lpush.json.p", exports.lpush.json)
