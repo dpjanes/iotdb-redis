@@ -35,7 +35,9 @@ echo "=================="
         --exclude "yy*" \
         README.md LICENSE \
         package.json \
-        *.js \
+        index.js \
+        logger.js \
+        lib/*.js \
         |
     ( cd "${NPM_DST}" && tar xvf - && npm publish ) || exit 1
     git commit -m "new release" package.json || exit 1
