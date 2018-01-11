@@ -12,6 +12,7 @@
 
 module.exports = Object.assign({},
     require("./del"),
+    require("./error"),
     require("./expire"),
     require("./get"),
     require("./initialize"),
