@@ -5,12 +5,12 @@
     }, 
     "dependencies": {
         "iotdb-errors": "~3.1.8", 
-        "iotdb-helpers": "~3.3.2", 
+        "iotdb-helpers": "~3.4.2", 
         "redis": "~2.8.0"
     }, 
     "description": "IOTDB AWS Promise Functions", 
     "devDependencies": {
-        "grunt": "~1.0.3", 
+        "grunt": "~1.0.4", 
         "grunt-contrib-jshint": "~1.1.0", 
         "grunt-contrib-nodeunit": "~1.0.0", 
         "grunt-contrib-uglify": "~3.4.0", 
