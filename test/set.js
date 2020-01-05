@@ -33,6 +33,42 @@ const redis$cfg = require("./data/redis$cfg.json")
 const _util = require("./_util")
 
 describe("set", function() {
+    it("fail - missing key", function(done) {
+        _.promise()
+            .then(_util.initialize)
+        
+            .add({
+                "key": null,
+                "value": "a value",
+            })
+            .then(redis.set)
+            .then(_util.auto_fail(done))
+            .catch(_util.ok_error(done))
+    })
+    it("fail - value is null", function(done) {
+        _.promise()
+            .then(_util.initialize)
+        
+            .add({
+                "key": "test/set.1",
+                "value": null,
+            })
+            .then(redis.set)
+            .then(_util.auto_fail(done))
+            .catch(_util.ok_error(done))
+    })
+    it("fail - value is number", function(done) {
+        _.promise()
+            .then(_util.initialize)
+        
+            .add({
+                "key": "test/set.1",
+                "value": 1.2,
+            })
+            .then(redis.set)
+            .then(_util.auto_fail(done))
+            .catch(_util.ok_error(done))
+    })
     it("normal", function(done) {
         _.promise()
             .then(_util.initialize)
@@ -44,6 +80,26 @@ describe("set", function() {
             .then(redis.set)
 
             .add("value", null)
+            .then(redis.get)
+            .make(sd => {
+                const got = sd.value
+                const want = "a value"
+                assert.deepEqual(got, want)
+            })
+
+            .end(done)
+    })
+    it("parameterized", function(done) {
+        _.promise()
+            .then(_util.initialize)
+        
+            .then(redis.set.p("test/set.2", "a value"))
+            .make(sd => {
+                assert.ok(!sd.key)
+                assert.ok(!sd.value)
+            })
+
+            .add("key", "test/set.2")
             .then(redis.get)
             .make(sd => {
                 const got = sd.value
