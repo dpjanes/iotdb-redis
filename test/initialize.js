@@ -34,9 +34,9 @@ const _util = require("./_util")
 
 describe("initialize", function() {
     /*
-    it("fails without redisd", function(done) {
+    it("fails without redis$cfg", function(done) {
         _.promise({})
-            .add("redisd", null)
+            .add("redis$cfg", null)
             .then(redis.initialize)
             .make(sd => {
                 assert.ok(_.is.Object(sd.redis))
@@ -46,7 +46,7 @@ describe("initialize", function() {
     */
     it("works", function(done) {
         _.promise({})
-            .add("redisd", redis$cfg)
+            .add("redis$cfg", redis$cfg)
             .then(redis.initialize)
             .make(sd => {
                 assert.ok(_.is.Object(sd.redis))

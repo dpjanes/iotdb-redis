@@ -8,7 +8,7 @@
         "iotdb-helpers": "~3.4.2", 
         "redis": "~2.8.0"
     }, 
-    "description": "IOTDB AWS Promise Functions", 
+    "description": "POP Redis",
     "devDependencies": {
         "grunt": "~1.0.4", 
         "grunt-contrib-jshint": "~1.1.0", 
@@ -28,7 +28,8 @@
         "url": "https://github.com/dpjanes/iotdb-redis"
     }, 
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "cover": "nyc --reporter=html mocha --recursive", 
+        "test": "mocha --recursive --bail"
     }, 
-    "version": "1.0.15"
+    "version": "2.0.0"
 }

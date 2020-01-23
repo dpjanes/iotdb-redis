@@ -45,7 +45,7 @@ const ok_error = (done, code) => error => {
  */
 const initialize = _.promise((self, done) => {
     _.promise(self)
-        .add("redisd", redis$cfg)
+        .add("redis$cfg", redis$cfg)
         .then(redis.initialize)
         .end(done, self, "redis")
 })
