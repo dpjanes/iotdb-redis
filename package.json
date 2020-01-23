@@ -4,22 +4,11 @@
         "url": "https://github.com/dpjanes/iotdb-redis/issues"
     }, 
     "dependencies": {
-        "iotdb-errors": "~3.1.8", 
-        "iotdb-helpers": "~3.4.2", 
+        "iotdb-errors": "~3.1.9", 
+        "iotdb-helpers": "~3.4.8", 
         "redis": "~2.8.0"
     }, 
-    "description": "POP Redis",
-    "devDependencies": {
-        "grunt": "~1.0.4", 
-        "grunt-contrib-jshint": "~1.1.0", 
-        "grunt-contrib-nodeunit": "~1.0.0", 
-        "grunt-contrib-uglify": "~3.4.0", 
-        "grunt-contrib-watch": "~1.1.0", 
-        "grunt-jsbeautifier": "~0.2.13", 
-        "jshint-stylish": "~2.2.1", 
-        "load-grunt-tasks": "~3.5.2", 
-        "request": "~2.88.0"
-    }, 
+    "description": "POP Redis Functions", 
     "license": "Apache-2.0", 
     "main": "index.js", 
     "name": "iotdb-redis", 
@@ -31,5 +20,5 @@
         "cover": "nyc --reporter=html mocha --recursive", 
         "test": "mocha --recursive --bail"
     }, 
-    "version": "2.0.0"
+    "version": "2.0.1"
 }
